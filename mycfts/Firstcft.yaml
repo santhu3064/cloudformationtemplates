@@ -1,0 +1,45 @@
+---
+  Resources:
+    MyEC2Instance:
+      Type: AWS::EC2::Instance
+      Properties:
+        AvailabilityZone: us-east-1a
+        ImageId: ami-a4dc46db
+        InstanceType: t2.micro
+        SecurityGroups:
+          - !Ref MyFirstsecurityGroup
+          - !Ref MySecondSecurityGroup
+
+          #setting up Elastic ip for the instance:
+    MyElasticIp:
+      Type: AWS::EC2::EIP
+      Properties:
+        InstanceId: !Ref MyEC2Instance
+
+    #Creating first security Group
+    MyFirstsecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupName: Securitygroup1
+        GroupDescription: The first security group
+        SecurityGroupIngress:
+          - CidrIp: 0.0.0.0/0
+            FromPort: 22
+            IpProtocol: tcp
+            ToPort: 22
+
+# Creating second security grpoup allows all inbout traffic via port 80 form all Resources
+    MySecondSecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupName: Securitygroup2
+        GroupDescription: The first security group
+        SecurityGroupIngress:
+          - CidrIp: 0.0.0.0/0
+            FromPort: 80
+            IpProtocol: tcp
+            ToPort: 80
+          - CidrIp: 192.168.1.1/32
+            FromPort: 80
+            IpProtocol: tcp
+            ToPort: 80
