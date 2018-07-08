@@ -1,0 +1,9 @@
+Resources:
+  MyOutputSecurityInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId:  ami-b70554c8
+      AvailabilityZone:  us-east-1a
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - !ImportValue testoutput

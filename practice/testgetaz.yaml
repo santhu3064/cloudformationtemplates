@@ -1,0 +1,4 @@
+Fn::GetAZs: ""
+Fn::GetAZs:
+  Ref: "AWS::Region"
+Fn::GetAZs: us-east-1

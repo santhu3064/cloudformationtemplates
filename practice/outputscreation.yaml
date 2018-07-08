@@ -1,0 +1,24 @@
+Resources:
+  OutputSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: test secuity
+      SecurityGroupIngress:
+        - CidrIp: 10.1.12.1/24
+          FromPort: 22
+          IpProtocol: tcp
+          ToPort: 22
+        - CidrIp: 10.1.13.1/24
+          FromPort: 22
+          IpProtocol: tcp
+          ToPort: 22
+        - CidrIp: 10.1.14.1/24
+          FromPort: 22
+          IpProtocol: tcp
+          ToPort: 22
+Outputs:
+  Teststackoutputsecurity:
+    Description:  usage of test security group in OutputSecurityGroup
+    Value:  !Ref OutputSecurityGroup
+    Export:
+      Name: testoutput
